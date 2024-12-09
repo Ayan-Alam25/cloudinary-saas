@@ -9,8 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@clerk/clerk-react": "^5.19.0",
-    "@clerk/nextjs": "^6.8.0",
+    "@clerk/nextjs": "^6.3.4",
     "@prisma/client": "^5.22.0",
     "axios": "^1.7.7",
     "cloudinary": "^2.5.1",
@@ -36,3 +35,5 @@
     "typescript": "^5.6.3"
   }
 }
+
+
