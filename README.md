@@ -1,36 +1,80 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Build cloudinary AI powered SAAS
 
-## Getting Started
+**Project is Build using NextJS, cloudinary, Prisma, NeonDB and Daisy UI**
 
-First, run the development server:
+## Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+-   Node.js (v14 or later)
+-   npm (v6 or later)
+-   A Clerk account (for authentication)
+-   A Neon account (for PostgreSQL database)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository & Install dependencies:
+    ```bash
+    git clone https://github.com/AdarshTheki/cloud-based-app.git
+    cd cloud-based-app
+    npm install
+    ```
+2. Set up environment variables: Create a `.env.local` file in the root directory and add the following variables:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    ```bash
+    NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
+    NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
+    NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=
+    CLERK_SECRET_KEY=
 
-## Learn More
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME=
+    CLOUDINARY_API_SECRET=
+    CLOUDINARY_API_KEY=
 
-To learn more about Next.js, take a look at the following resources:
+    DATABASE_URL=
+    ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. Set up Prisma ORM:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    - Create TypeScript project and set up Prisma ORM
 
-## Deploy on Vercel
+        ```bash
+        npm install typescript tsx @types/node --save-dev
+        ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    - Model your data in the Prisma schema:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+        ```js
+        model Video {
+            id              String @id @default(cuid())
+            title           String
+            description     String
+            publicId        String
+            originSize      String
+            compressedSize  String
+            duration        Float
+            createdAt       DateTime @default(now())
+            updatedAt       DateTime @updatedAt
+        }
+
+        ```
+
+    - Run a migration to create your database tables with Prisma Migrate
+
+        ```bash
+        npx prisma migrate dev --name init
+        ```
+
+## Features
+
+-   User authentication with Clerk
+-   Role-based access control (Admin and User roles)
+-   Todo management (Create, Read, Update, Delete)
+-   Subscription-based todo limits
+-   Admin dashboard for user management
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License.
